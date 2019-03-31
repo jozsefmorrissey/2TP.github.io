@@ -8,7 +8,7 @@ exports.logger = (config) => {
 
   function init() {
     let level = config.DEBUG_LEVEL;
-    if (level == undefined) level = 'error';
+    if (level === undefined) level = 'error';
     logger = weblog({ name: 'HLWA', level });
     for (let index = 0; index < preInitLogs.length; index += 1) {
       const obj = preInitLogs[index];

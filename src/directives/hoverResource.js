@@ -41,11 +41,12 @@ function hoverResource(hoverSrvc, logger) {
       const css = {
         cursor: 'pointer',
         position: 'absolute',
-        "z-index": zIndex++,
+        'z-index': zIndex,
         left,
         width,
         top,
       };
+      zIndex += 1;
       content.css(css);
       logger.debug(css);
       compileContent();

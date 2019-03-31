@@ -44,8 +44,8 @@ exports.webSocket = ($q, $rootScope, userSrvc, config, logger) => {
 
       ws.onopen = () => {
         logger.info('Socket has been opened!');
-        let userObj = userSrvc.getUser();
-        let userObjStr = userObj ? JSON.stringify(userObj) : '{}';
+        const userObj = userSrvc.getUser();
+        const userObjStr = userObj ? JSON.stringify(userObj) : '{}';
         ws.send(userObjStr);
       };
 

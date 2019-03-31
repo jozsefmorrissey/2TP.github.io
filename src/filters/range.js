@@ -1,14 +1,13 @@
 exports.range = () => {
   function filter(input, start, end) {
-    start = parseInt(start);
+    let s = parseInt(start, 10);
+    let e = parseInt(end, 10);
     if (end === undefined) {
-      end = start;
-      start = 0;
-    } else {
-      end = parseInt(end)
+      e = s;
+      s = 0;
     }
 
-    for (var i=start; i<end; i++) {
+    for (let i = s; i < e; i += 1) {
       input.push(i);
     }
 

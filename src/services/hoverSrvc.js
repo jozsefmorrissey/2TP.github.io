@@ -52,7 +52,6 @@ exports.hoverSrvc = ($timeout, $compile, $state, $location, configSrvc, logger) 
     loadedContent[key].data = configSrvc.getTopicHtml('keywords', key);
     $(`#${id}`).find('.hover-inner').html(loadedContent[key].data);
     function compile() {
-      scope.key = $(`#${id}`).attr('key');
       $compile($(`#${id}`))(scope);
     }
 

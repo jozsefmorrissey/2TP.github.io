@@ -10,7 +10,6 @@ import { range } from './src/filters/range';
 import { descript } from './src/filters/descript';
 
 import { hoverResource } from './src/directives/hoverResource';
-import { dummy } from './src/directives/dummy';
 import { navBar } from './src/directives/navBar';
 import { internalLink } from './src/directives/internalLink';
 import { externalLink } from './src/directives/externalLink';
@@ -57,7 +56,6 @@ angular.module('routerApp', [uiRouter, ngCookies, jozsefLib, 'angularTrix'])
   .filter('range', range)
   .constant('config', config)
   .directive('hoverResource', hoverResource)
-  .directive('dummy', dummy)
   .directive('navBar', navBar)
   .directive('internalLink', internalLink)
   .directive('externalLink', externalLink)
