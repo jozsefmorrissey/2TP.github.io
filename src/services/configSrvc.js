@@ -150,14 +150,14 @@ exports.configSrvc = ($http, $state, $stateParams, $transitions, $cookies, $time
     logger.debug(arguments);
     const info = getTopicInfo(attr, key);
     if (info !== undefined) {
-      return info.replace(/<.*?>|&.*?;/g, '');
+      return info.replace(/<.*?>|&nbsp;/g, ' ');
     }
     return undefined;
   }
 
   function getTopicHtml(attr, key) {
     logger.debug(arguments);
-    const raw = getTopicRaw(attr, key);
+    const raw = getTopicRaw(attr, key).trim();
     if (raw && raw.indexOf('@') === 0) {
       return getTopicHtml(attr, raw.substr(1));
     }

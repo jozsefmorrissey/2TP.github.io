@@ -6,22 +6,28 @@ exports.topicCtrl = ($scope, $rootScope, $state, $compile, $injector,
     return b.length - a.length;
   }
 
-  function surroundWord(jqObj, word, htmlStr) {
-    let html = `>> ${jqObj.html()} <<`;
-    html = html.replace(/\n/g, ' ');
+  function surroundWord(jqObj, elemHtml, word, htmlStr) {
+    if (jqObj.children().length) {
+      return false;
+    }
+    let found = false;
+    let html = elemHtml.replace(/\n/g, ' ');
     const escWord = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     let wordReg = `(>[^>^<]{1,})${escWord}([^>^<]*<)`;
     while (html.match(wordReg)) {
       const jqSurrounded = $(htmlStr).text(word);
       html = html.replace(new RegExp(wordReg, 'g'), `$1${jqSurrounded[0].outerHTML}$2`);
       jqObj.html(html.substr(2, html.length - 4));
+      found = true;
     }
     wordReg = `(>[^>^<]*)${escWord}([^>^<]{1,}<)`;
     while (html.match(wordReg)) {
       const jqSurrounded = $(htmlStr).text(word);
       html = html.replace(new RegExp(wordReg, 'g'), `$1${jqSurrounded[0].outerHTML}$2`);
       jqObj.html(html.substr(2, html.length - 4));
+      found = true;
     }
+    return found;
   }
 
   function toLower(match) {
@@ -36,10 +42,10 @@ exports.topicCtrl = ($scope, $rootScope, $state, $compile, $injector,
       if (!jqElem.attr(directiveId)) {
         for (let index = 0; index < keywords.length; index += 1) {
           const word = keywords[index];
-          surroundWord(jqElem, word, `<${directive}></${directive}>`);
-        }
-        if ($(elem).html().indexOf(`<${directive}>`) > -1) {
-          $compile(elem)($scope);
+          const html = `>> ${jqElem.html()} <<`;
+          if (surroundWord(jqElem, html, word, `<${directive}></${directive}>`)) {
+            $compile(elem)($scope);
+          }
         }
         jqElem.attr(directiveId, true);
       }

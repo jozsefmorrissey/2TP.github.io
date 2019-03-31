@@ -78,6 +78,7 @@ function hoverResource(hoverSrvc, logger) {
   }
 
   return {
+    scope: true,
     controller: ctrl,
   };
 }

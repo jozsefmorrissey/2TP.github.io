@@ -1,6 +1,6 @@
 const KEYWORD = 'keyword';
 
-exports.hoverSrvc = ($compile, $state, $location, configSrvc, logger) => {
+exports.hoverSrvc = ($timeout, $compile, $state, $location, configSrvc, logger) => {
   const obj = {};
   const loadedContent = {};
 
@@ -11,16 +11,15 @@ exports.hoverSrvc = ($compile, $state, $location, configSrvc, logger) => {
   function getContent($element, id, contentId) {
     switch (contentId) {
       case KEYWORD: {
-        const keyword = $($element).text();
         const key = getKey($element);
-        if (keyword) {
+        if (key) {
           if (!loadedContent[key]) {
             loadedContent[key] = {};
           }
           loadedContent[key].data = configSrvc.getKeywordHtml(key);
-          logger.debug({ keyword, key, content: loadedContent[key] });
+          logger.debug({ key, content: loadedContent[key] });
           if (loadedContent[key].data) {
-            return;
+            return key;
           }
         }
 
@@ -38,9 +37,9 @@ exports.hoverSrvc = ($compile, $state, $location, configSrvc, logger) => {
       let content;
       switch (name) {
         default:
-          content = $(`<div class="hover-outer" id='${id}' ng-click='$event.stopPropagation()'>
+          content = $(`<div attrs='{"key": "${key}"}' key='${key}' class="hover-outer" id='${id}' ng-click='$event.stopPropagation()'>
                         <button class='hover-close-btn' ng-click='close("${id}")'>X</button>
-                        <div class='hover-inner'>
+                        <div class='hover-inner' key='${key}'>
                           ${loadedContent[key].data}
                         </div>
                       </div>`);
@@ -52,11 +51,17 @@ exports.hoverSrvc = ($compile, $state, $location, configSrvc, logger) => {
 
     loadedContent[key].data = configSrvc.getTopicHtml('keywords', key);
     $(`#${id}`).find('.hover-inner').html(loadedContent[key].data);
-    $compile($(`#${id}`))(scope);
+    function compile() {
+      scope.key = $(`#${id}`).attr('key');
+      $compile($(`#${id}`))(scope);
+    }
+
+    $timeout(compile, 10);
     return loadedContent[key][name];
   }
 
   obj.getContainer = getContainer;
   obj.getContent = getContent;
+  obj.getKey = getKey;
   return obj;
 };
