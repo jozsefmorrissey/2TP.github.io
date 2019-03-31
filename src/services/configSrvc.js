@@ -21,7 +21,7 @@ exports.configSrvc = ($http, $state, $stateParams, $transitions, $cookies, $time
   }
 
   function contentChange() {
-    webSocket.sendRequest();
+    // webSocket.sendRequest();
   }
 
   function runUpdateFuncs() {
@@ -64,10 +64,10 @@ exports.configSrvc = ($http, $state, $stateParams, $transitions, $cookies, $time
   }
 
   function connect() {
-    if (!connected) {
-      webSocket.init(getState(), updateContent, getContent);
-      connected = true;
-    }
+    // if (!connected) {
+    //   webSocket.init(getState(), updateContent, getContent);
+    //   connected = true;
+    // }
   }
 
   function saveUserVersion() {
