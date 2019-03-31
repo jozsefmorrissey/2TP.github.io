@@ -7,7 +7,6 @@ const config = {
 	HOST: "32.215.159.32",
 	ORIGIN: "https://32.215.159.32:8020/",
 	PORT: "8020",
-	DEBUG_LEVEL:"trace",
 	URL_CHILDREN: "https://32.215.159.32:8020/topic/children/",
 	URL_PAGE: "https://32.215.159.32:8020/page/",
 	URL_SEARCH: "https://32.215.159.32:8020/info/search",
