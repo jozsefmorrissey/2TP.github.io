@@ -17,8 +17,8 @@ const config = {
 	URL_USER_RESET: "https://32.215.159.32:8010/user/reset/password/",
 	URL_USER_UPDATE: "https://32.215.159.32:8010/user/update/",
 	URL_USER_UPDATE_PASSWORD: "https://32.215.159.32:8010/user/update/password/",
-	WEB_SOCKET_URL: "ws://32.215.159.32:8030/topic/"
-	DEBUG_LEVEL:"error",
+	WEB_SOCKET_URL: "ws://32.215.159.32:8030/topic/",
+	DEBUG_LEVEL: "error",
 };
 
 exports.config = config;
