@@ -434,7 +434,12 @@ function levenshteinDistance(a, b) {
 }
 
 var script = document.createElement("script");
-script.src = 'https://jozsefmorrissey.github.io/index.js';
+script.src = 'https://jozsefmorrissey.github.io/not-related/utility-filter/js/multiselect.min.js';
 document.head.appendChild(script);
+
+var style = document.createElement("link");
+style.href = 'https://jozsefmorrissey.github.io/not-related/utility-filter/styles/multiselect.css';
+style.rel = 'stylesheet';
+document.head.appendChild(style);
 
 window.addEventListener('load', onLoad);
