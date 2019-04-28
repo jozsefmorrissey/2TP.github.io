@@ -32,6 +32,7 @@ import { logger } from './src/services/logger';
 
 import { homeCtrl } from './src/views/home/home';
 import { resetCtrl } from './src/views/reset/reset';
+import { redirectCtrl } from './src/views/redirect/redirect';
 import { topicCtrl } from './src/views/topic/topic';
 import { loginCtrl } from './src/views/login/login';
 import { revisionsCtrl } from './src/views/revisions/revisions';
@@ -164,6 +165,15 @@ angular.module('routerApp', [uiRouter, ngCookies, jozsefLib, 'angularTrix'])
         main: {
           templateUrl: 'src/views/test/test.html',
           controller: testCtrl,
+        },
+      },
+    })
+    .state('redirect', {
+      url: '/redirect/:url',
+      views: {
+        main: {
+          templateUrl: 'src/views/redirect/redirect.html',
+          controller: redirectCtrl,
         },
       },
     });
