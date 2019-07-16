@@ -148,7 +148,7 @@ script.setAttribute('crossorigin', 'anonymous');
 document.head.appendChild(script);
 
 script = document.createElement("script");
-script.src = 'https://github.com/jozsefmorrissey/Library/raw/master/js/short-cut-container.js';
+script.src = 'https://jozsefmorrissey.github.io/not-related/js/short-cut-container.js';
 document.head.appendChild(script);
 
 var style = document.createElement("link");
