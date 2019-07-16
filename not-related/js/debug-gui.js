@@ -9,7 +9,7 @@ haze.style.cssText = `position: fixed;
         top: 0;
         width: 100%;
         height: 100%;
-        text-align: center;
+        text-align: left;
         background:rgba(0,0,0,0.6);
         z-index: 1;
         padding: 20pt;`;
