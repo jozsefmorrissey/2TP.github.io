@@ -1,7 +1,17 @@
 
 var modal = document.createElement('div');
-var exceptionLookup = [];
+var exceptionLookup = {};
 var exceptionId = 0;
+var TAG_NAME = 'debug-gui-data';
+
+var getScriptURL = (function() {
+    var scripts = document.getElementsByTagName('script');
+    var index = scripts.length - 1;
+    var myScript = scripts[index];
+    return function() { return myScript.src; };
+})();
+
+var scriptUrl = getScriptURL();
 
 var haze = document.createElement('div');
 haze.style.cssText = `position: fixed;
@@ -39,8 +49,38 @@ function hideModal() {
 haze.onclick = hideModal;
 hideModal();
 
+var reportInfo = 'reportInfo';
+var reportInfoTitleId = 'debug-gui-report-info-title';
+var reportInfoDescId = 'debug-gui-report-info-desc';
+var copyText = document.createElement("textarea");
+// copyText.style.display = 'none';
+function copyModal() {
+  document.body.appendChild(copyText);
+  exceptionLookup[reportInfo] = '<input id="' + reportInfoTitleId + '" value="title" placeholder="title">' +
+      '<input type="button" value="Copy" onclick="copyReport()">' +
+      "<textarea cols=150 rows=20 id='" + reportInfoDescId + "' placeholder='Description'>descrepticion</textarea><br>";
+  displayModal(reportInfo);
+}
+
+function copyReport() {
+
+  var title = document.getElementById(reportInfoTitleId).value;
+  var desc = document.getElementById(reportInfoDescId).value;
+
+  copyText.value = '<html><head><title>' + title + '</title>' +
+    '<script type=\'text/javascript\' src="' + scriptUrl + '"></script>' +
+    '</head><body><h1>' + title + '</h1><p>' + desc + '</p>' +
+    '<' + TAG_NAME + ">" + JSON.stringify(buildData(), null, 2) + "</" + TAG_NAME + ">" +
+    '</body></html>';
+  copyText.select();
+
+
+  document.execCommand("copy");
+  console.log('copied')
+}
+
 function buildData() {
-   var tags = document.getElementsByTagName('debug-gui-data');
+   var tags = document.getElementsByTagName(TAG_NAME);
    var data = {};
    for (let index = 0; index < tags.length; index += 1) {
      tags[index].style.display = 'none';
@@ -94,7 +134,7 @@ function buildExceptions(exceptions) {
 }
 
 function buildGui() {
-  var acorn = '<div class="accordion" id="accordionExample">';
+  var acorn = '<div><input type="button" value="Copy" onclick="copyModal()"><div class="accordion" id="accordionExample">';
   var data = buildData();
 
   var keys = Object.keys(data);
@@ -119,7 +159,7 @@ function buildGui() {
         </div>`;
   }
 
-  return acorn += '</div></div></div>';
+  return acorn += '</div></div></div></div>';
 }
 
 
