@@ -19,7 +19,7 @@ haze.style.cssText = `position: fixed;
         top: 0;
         width: 100%;
         height: 100%;
-        text-align: left;
+        text-align: center;
         background:rgba(0,0,0,0.6);
         z-index: 1;
         padding: 20pt;`;
@@ -30,6 +30,7 @@ popup.style.cssText = `background-color: white;
         padding: 10pt 20pt;
         display: inline-block;
         max-width: 80%;
+        text-align: left;
         max-height: 80%;
         overflow: scroll;
         border-radius: 2pt;`;
@@ -52,13 +53,13 @@ hideModal();
 var reportInfo = 'reportInfo';
 var reportInfoTitleId = 'debug-gui-report-info-title';
 var reportInfoDescId = 'debug-gui-report-info-desc';
-var copyText = document.createElement("textarea");
-// copyText.style.display = 'none';
+var copyTextId = 'debug-gui-copy-text';
+
 function copyModal() {
-  document.body.appendChild(copyText);
-  exceptionLookup[reportInfo] = '<input id="' + reportInfoTitleId + '" value="title" placeholder="title">' +
+  exceptionLookup[reportInfo] = '<input id="' + reportInfoTitleId + '" placeholder="title">' +
       '<input type="button" value="Copy" onclick="copyReport()">' +
-      "<textarea cols=150 rows=20 id='" + reportInfoDescId + "' placeholder='Description'>descrepticion</textarea><br>";
+      '<textarea placeholder="Text to copy" id="' + copyTextId + '" style="float: right;"></textarea>' +
+      "<textarea cols=120 rows=20 id='" + reportInfoDescId + "' placeholder='Description'></textarea><br>";
   displayModal(reportInfo);
 }
 
@@ -66,6 +67,7 @@ function copyReport() {
 
   var title = document.getElementById(reportInfoTitleId).value;
   var desc = document.getElementById(reportInfoDescId).value;
+  var copyText = document.getElementById(copyTextId);
 
   copyText.value = '<html><head><title>' + title + '</title>' +
     '<script type=\'text/javascript\' src="' + scriptUrl + '"></script>' +
@@ -134,7 +136,7 @@ function buildExceptions(exceptions) {
 }
 
 function buildGui() {
-  var acorn = '<div><input type="button" value="Copy" onclick="copyModal()"><div class="accordion" id="accordionExample">';
+  var acorn = '<div><input type="button" value="Copy Html Report" onclick="copyModal()"><div class="accordion" id="accordionExample">';
   var data = buildData();
 
   var keys = Object.keys(data);
