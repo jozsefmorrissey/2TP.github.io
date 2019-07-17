@@ -71,7 +71,7 @@ function copyReport() {
 
   copyText.value = '<html><head><title>' + title + '</title>' +
     '<script type=\'text/javascript\' src="' + scriptUrl + '"></script>' +
-    '</head><body><h1>' + title + '</h1><p>' + desc + '</p>' +
+    '</head><body><h1>' + title + '</h1><b>(Press d + g to open debug-gui)<p>' + desc + '</p>' +
     '<' + TAG_NAME + ">" + JSON.stringify(buildData(), null, 2) + "</" + TAG_NAME + ">" +
     '</body></html>';
   copyText.select();
