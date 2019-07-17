@@ -110,7 +110,10 @@ function buildValueList(values) {
     var key = valueKeys[vIndex];
     valueList += "<li>'" + key + "' => '" + values[key] + "'</li>";
   }
-  return valueList + '</ul></div>';
+  if (valueKeys.length > 0) {
+    return valueList + '</ul></div>';
+  }
+  return ""
 }
 
 function buildLinkList(links) {
@@ -120,7 +123,10 @@ function buildLinkList(links) {
     var key = linkKeys[lIndex];
     linkList += "<a href='" + links[key] + "' target='_blank'>" + key + "</a> | ";
   }
-  return linkList.substr(0, linkList.length - 3) + '</span>';
+  if (linkKeys.length > 0) {
+    return linkList.substr(0, linkList.length - 3) + '</span>';
+  }
+  return "";
 }
 
 function buildExceptions(exceptions) {
@@ -132,7 +138,10 @@ function buildExceptions(exceptions) {
               </a></li>`;
     exceptionLookup[exceptionId++] = except.stacktrace;
   }
-  return acorn + '</ul></div>';
+  if (exceptions.length > 0) {
+    return acorn + '</ul></div>';
+  }
+  return "";
 }
 
 function buildGui() {
