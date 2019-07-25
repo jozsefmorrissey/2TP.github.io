@@ -10,7 +10,7 @@ function ShortCutCointainer(id, keys, html) {
   }
   var barCss = 'border-top-style: double;' +
     'border-top-width: 5pt;' +
-    'cursor: row-resize;' + 
+    'cursor: row-resize;' +
     'border-color: #4dce55;';
 
   var ssc = document.createElement('div');
@@ -126,10 +126,15 @@ function ShortCutCointainer(id, keys, html) {
     delete currentKeys[e.key];
   }
 
+  function innerHtml(html) {
+    container.innerHTML = html;
+  }
+
   window.onmouseup = mouseup;
   window.onmousedown = mousedown;
   window.onmousemove = resize;
   window.onkeyup = keyUpListener;
   window.onkeydown = keyDownListener;
   onLoad();
+  return {innerHtml};
 }
