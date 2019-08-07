@@ -9,10 +9,16 @@ app.use(express.static('public'));
 
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('cert/debug-gui-com.key.pem', 'utf8');
-var certificate = fs.readFileSync('cert/debug-gui-com.cert.pem', 'utf8');
 
-var credentials = {key: privateKey, cert: certificate};
+
+var https_options = {
+  key: fs.readFileSync("./cert/jozsefmorrissey_com.key"),
+  cert: fs.readFileSync("./cert/jozsefmorrissey_com.crt"),
+  ca: [
+      fs.readFileSync('./cert/CAcert1.crt'),
+      fs.readFileSync('./cert/CAcert2.crt')
+  ]
+};
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -151,6 +157,12 @@ app.get("/time/limit", function (req, res) {
   res.send("" + timeLimit / 1000);
 });
 
+app.get("/msg/:msg", function (req, res) {
+  const msg = req.params.msg;
+  console.log(msg);
+  res.send("success");
+});
+
 app.get("/time/limit/:newTime", function (req, res) {
   var newTime = Number.parseInt(req.params.newTime);
   if (Number.isInteger(newTime)) {
@@ -161,7 +173,7 @@ app.get("/time/limit/:newTime", function (req, res) {
 });
 
 var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
+var httpsServer = https.createServer(https_options, app);
 
-httpServer.listen(3330, '10.87.177.95');
-httpsServer.listen(3333, '10.87.177.95');
+httpServer.listen(80);
+httpsServer.listen(443);
