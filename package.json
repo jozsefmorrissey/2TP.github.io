@@ -36,7 +36,7 @@
     "eslint-plugin-react": "^7.0.1",
     "fs": "0.0.1-security",
     "fusioncharts": "3.12.0",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "ip": "^1.1.5",
     "jozsef-lib": "^1.1.2",
     "logger": "0.0.1",
@@ -52,11 +52,11 @@
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
-    "babel-loader": "^6.2.5",
+    "babel-loader": "^9.1.0",
     "babel-polyfill": "^6.13.0",
     "babel-preset-latest": "^6.14.0",
     "babel-preset-stage-0": "^6.5.0",
-    "webpack": "^1.13.2",
+    "webpack": "^5.75.0",
     "webpack-dev-server": "^1.15.2",
     "webpack-watch-livereload-plugin": "0.0.1"
   },
